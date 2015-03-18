@@ -1,0 +1,98 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 18, 2015, 4:52:45 PM
+    Author     : esteban
+*/
+@charset "UTF-8";
+body
+{
+    margin: 0px auto;
+    width: 500px;
+    background-color: #EEEEEE;
+}
+
+body.body_intro
+{
+    margin: 0px auto;
+    width: 1250px;
+    background-color: #EEEEEE;
+}
+#header
+{
+    position : fixed;
+    background-color: #000;
+    width: 1100px;
+    text-align: center;
+    z-index: 1;
+    
+       
+}
+
+.ul_header li a:hover
+{
+  background-color:#434343;
+}
+
+.ul_header li 
+{
+     display: inline;
+     
+}
+
+.ul_header li a
+{
+     text-decoration: none;
+     color:#EEEEEE;
+    padding:10px 15px;
+}
+
+#menu
+{
+    position: fixed;
+    float: left;
+    width: 200px;
+    height: 800px;
+    margin-top: 50px;
+    background-color: #038170;
+}
+
+.ul_menu
+{
+    width: 150px;
+}
+.ul_menu li
+{
+    list-style: none;
+    width: inherit;
+}
+.ul_menu li a
+{
+    text-decoration: none;
+    color:#EEEEEE;
+    padding:10px 15px;
+    display:block;
+    text-align: center;
+}
+
+.ul_menu li a:hover
+{
+  background-color:#434343;
+}
+
+#div_noticias
+{
+    position: absolute;
+    width: 900px;
+    height: 800px;
+    margin-top: 50px;
+    margin-left: 200px; 
+    background-color: #098540;
+}
+#div_noticias_contenido
+{
+    position: relative;
+}
