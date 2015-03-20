@@ -28,11 +28,14 @@
             }
             var usuario = getUrlParameter('usuario');
             var url_perfil = "perfil.jsp?usuario="+usuario;
+            var url_buscar = "buscar_amigos.jsp?usuario="+usuario+"&tipo=Amigos";
             $(document).ready(function(){
                 $("#enlace_perfl").each(function(i){
                    $(this).attr("href",url_perfil);
+                   
                 });
             });
+            
         </script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Proto Music</title>
@@ -52,18 +55,27 @@
                 </div>
             </div>
             <ul class="ul_menu">
-                <li><a href="">Artistas</a></li>
-                <li><a href="">Amigos</a></li>
-                <li><a href="">Fans Clubs</a></li>
-                <li><a href="">Todo</a></li>
+                <li><a href="" id="enlace_ul_menu_Artista">Artistas</a></li>
+                <li><a href="" id="enlace_ul_menu_Amigos">Amigos</a></li>
+                <li><a href="" id="enlace_ul_menu_Fans">Fans Clubs</a></li>
+                <li><a href="" id="enlace_ul_menu_Todo">Todo</a></li>
                 
             </ul>
         </div>
         <div id="div_noticias">
             <div id="div_noticias_contenido">
                 <label>Buscar:</label><br/>
-                <input type="text" id="buscar"/><br/>
+                <select id="tipo_busqueda">
+                    <option>Artistas</option>
+                    <option>Amigos</option>
+                    <option>Fans Clubs</option>
+                    <option>Todos</option>
+                </select><br/>
+                <input type="text" id="txtBuscar"/><br/>
                 <input type="submit" id="buscarPalabra" value="Buscar"/>
+            </div>
+            <div id="div_resultados">
+                
             </div>
         </div>
     </body>
