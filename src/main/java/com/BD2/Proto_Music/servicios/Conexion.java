@@ -1,5 +1,6 @@
 package com.BD2.Proto_Music.servicios;
 
+import com.BD2.Proto_Music.negocios.Usuario;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import org.neo4j.graphdb.DynamicLabel;
@@ -7,6 +8,7 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
+import org.neo4j.graphdb.RelationshipType;
 import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
@@ -42,8 +44,13 @@ public class Conexion {
     
     public enum NodeType implements Label
     {
-        Usuario, Sigue,Artista,FanClub;
+        Usuario, Artista,FanClub;
     }
+    
+    public enum Relacion implements RelationshipType{
+	SIGUE,RELACIONAMISTAD;
+        
+}
     public void conectar()
     {
        
@@ -185,12 +192,12 @@ public class Conexion {
         }
     }
     /*sdfsdfd*/
-    private Node existeNodoUsuario(String correo) 
+    private Node existeNodoUsuario(String email) 
     { 
         //Se realiza la consulta a la base de datos para comprobar la existencia del nodo
         Label label_usuario = DynamicLabel.label("Usuario"); 
         ResourceIterator<Node> res = this.getBase().findNodesByLabelAndProperty(label_usuario,
-                "email", correo).iterator();
+                "email", email).iterator();
         if (res.hasNext()) 
         {
                 Node bdNodo = res.next();
@@ -203,27 +210,55 @@ public class Conexion {
     }
 
     @SuppressWarnings("deprecation")
-    public ArrayList<String> obtenerNodo(String correo) {
-            ArrayList<String> lista = new ArrayList<String>(); 
+    public ArrayList<Usuario> obtenerNodo(String email) 
+    {
+            ArrayList<Usuario> lista = new ArrayList<Usuario>(); 
             this.conectar();
             this.setTx(this.getBase().beginTx());
 
-            Node nodo = existeNodoUsuario(correo);
+            Node nodo = existeNodoUsuario(email);
             if (nodo != null) 
             { 
-                lista.add((((String) nodo.getProperty("nombre")) + " ").concat((String) nodo.getProperty("apellido1")));
-                lista.add((String) nodo.getProperty("apellido1"));
-                lista.add((String) nodo.getProperty("apellido2"));
-                lista.add((String) nodo.getProperty("edad"));
-                lista.add((String) nodo.getProperty("pais")); 
-                lista.add((String) nodo.getProperty("tipoCuenta"));
+                
+                String nombreUsuarioObtenido = (String) nodo.getProperty("nombre");
+                String apellido1UsuarioObtenido = (String) nodo.getProperty("apellido1");
+                String apellido2UsuarioObtenido = (String) nodo.getProperty("apellido2");
+                String edadUsuarioObtenido = (String) nodo.getProperty("edad");
+                String paisUsuarioObtenido = (String) nodo.getProperty("pais"); 
+                
+                String emailUsuarioObtenido = (String) nodo.getProperty("email");
+                
+                Usuario usuario_obtenido = new Usuario(nombreUsuarioObtenido, apellido1UsuarioObtenido, apellido2UsuarioObtenido,
+                                                        paisUsuarioObtenido, edadUsuarioObtenido, emailUsuarioObtenido);
+                
+                lista.add(usuario_obtenido);
             }
 
             this.getTx().success();
             this.getTx().finish();
 
             this.desconectar();
-            return lista; }
+            return lista; 
+    }
+    
+    @SuppressWarnings("deprecation")
+    public void relacionarAmigos(String correo, String correo2) 
+    {
+        this.conectar();
+        this.setTx(this.getBase().beginTx());
+
+        Node nodoUsuario = existeNodoUsuario(correo);
+
+        Node nodoUsuarioAmigo = existeNodoUsuario(correo2);
+
+
+        this.setConexion(nodoUsuario.createRelationshipTo(nodoUsuarioAmigo, Relacion.RELACIONAMISTAD));
+
+        this.getTx().success();
+        this.getTx().finish();
+
+        this.desconectar(); 
+    }
 
 /*Comentario*/
     public String getDirectorio() {

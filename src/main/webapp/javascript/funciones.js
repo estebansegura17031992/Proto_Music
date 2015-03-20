@@ -52,8 +52,64 @@ $(document).ready(function()
             });
         }); 
         
+        
+
+        
+       $("#buscarPalabra").click(function()
+       {
+            //var usuario = getUrlParameter('usuario');
+            var palabra = $("#txtBuscar").val();
+            var tipoBusqueda = $("#tipo_busqueda option:selected").text();
+          
+            $.ajax(
+            {
+                type:'GET',
+                data:{usuario: usuario,palabra: palabra, tipoBusqueda: tipoBusqueda},
+                url: 'Controlador_Buscar',
+                
+                success: function(result)
+                {
+                    $("#div_resultados").html(result);
+                    $("#div_resultados").on("click","#agregar_amigo",function()
+                    {
+                        
+       
+                        var usuario = getUrlParameter('usuario');
+                        var palabra = $("#txtBuscar").val();
+                        var tipoBusqueda = $("#tipo_busqueda option:selected").text();
+
+                        $.ajax(
+                        {
+                            type:'POST',
+                            data:{usuario: usuario,palabra: palabra, tipoBusqueda: tipoBusqueda},
+                            url: 'Controlador_Relacionar',
+
+                            success: function(result)
+                            {
+                                alert("Amigo Agregado");
+                            }
+                        });
+           
+       
+                    });
+                }
+            });
+           
+       });
        
     
-    
+        function getUrlParameter(sParam)
+        {
+            var sPageURL = window.location.search.substring(1);
+            var sURLVariables = sPageURL.split('&');
+            for (var i = 0; i < sURLVariables.length; i++) 
+            {
+                var sParameterName = sURLVariables[i].split('=');
+                if (sParameterName[0] == sParam) 
+                {
+                    return sParameterName[1];
+                }
+            }
+        }
     });
 
