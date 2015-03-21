@@ -6,7 +6,7 @@
 package com.BD2.Proto_Music.servlets;
 
 import com.BD2.Proto_Music.negocios.Usuario;
-import com.Test_Neo4j_Maven.servicios.Conexion;
+import com.BD2.Proto_Music.servicios.Conexion;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -76,18 +76,20 @@ public class Controlador_Relacionar extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-        processRequest(request, response);
-        
+        response.setContentType("text/plain");
         String usuario = request.getParameter("usuario");
-            String palabra = request.getParameter("palabra");
-            String tipoBusqueda = request.getParameter("tipoBusqueda");
+        String palabra = request.getParameter("palabra");
+        String tipoBusqueda = request.getParameter("tipoBusqueda");
             
-            com.BD2.Proto_Music.servicios.Conexion conexionNeo4j = new com.BD2.Proto_Music.servicios.Conexion();
-            System.out.println("aqui");
-            //ArrayList<Usuario> usuario_obtenido = conexionNeo4j.obtenerNodo(palabra);
+        Conexion conexionNeo4j = new Conexion();
+        if(tipoBusqueda.equals("Amigos"))
+        {
+            
+            ArrayList<Usuario> usuario_obtenido = conexionNeo4j.obtenerNodo(palabra);
             conexionNeo4j.relacionarAmigos(usuario, palabra);
-            System.out.println("salgo aqui");
             PrintWriter out = response.getWriter();
+            
+        }
             
         
     }

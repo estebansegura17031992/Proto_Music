@@ -60,29 +60,30 @@ public class Controlador_Buscar extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException 
+    {
         response.setContentType("text/plain");
-            String usuario = request.getParameter("usuario");
-            String palabra = request.getParameter("palabra");
-            String tipoBusqueda = request.getParameter("tipoBusqueda");
-            
-            Conexion conexionNeo4j = new Conexion();
-            System.out.println("aqui");
-            ArrayList<Usuario> usuario_obtenido = conexionNeo4j.obtenerNodo(palabra);
-            //conexionNeo4j.relacionarAmigos(usuario, palabra);
-            System.out.println("salgo aqui");
-            PrintWriter out = response.getWriter();
-            for (int i = 0; i < usuario_obtenido.size(); i++) 
-            {
-                out.print("<label> Nombre: "+usuario_obtenido.get(i).getNombre()+"</label><br/>");
-                out.print("<label>Apellido1: "+usuario_obtenido.get(i).getApellido1()+"</label><br/>");
-                out.print("<label>Apellido2: "+usuario_obtenido.get(i).getApellido2()+"</label><br/>");
-                out.print("<label>Edad: "+usuario_obtenido.get(i).getEdad()+"</label><br/>");
-                out.print("<label>Pais: "+usuario_obtenido.get(i).getPais()+"</label><br/>");
-                out.print("<label>Email:" + usuario_obtenido.get(i).getEmail()+"</label><br/>");
-                out.print("<input type='submit' value='Agregar a mis amigos' id='agregar_amigo'/>");
-                
-            }
+        String usuario = request.getParameter("usuario");
+        String palabra = request.getParameter("palabra");
+        String tipoBusqueda = request.getParameter("tipoBusqueda");
+
+        Conexion conexionNeo4j = new Conexion();
+        System.out.println("aqui");
+        ArrayList<Usuario> usuario_obtenido = conexionNeo4j.obtenerNodo(palabra);
+        //conexionNeo4j.relacionarAmigos(usuario, palabra);
+        System.out.println("salgo aqui");
+        PrintWriter out = response.getWriter();
+        for (int i = 0; i < usuario_obtenido.size(); i++) 
+        {
+            out.print("<label> Nombre: "+usuario_obtenido.get(i).getNombre()+"</label><br/>");
+            out.print("<label>Apellido1: "+usuario_obtenido.get(i).getApellido1()+"</label><br/>");
+            out.print("<label>Apellido2: "+usuario_obtenido.get(i).getApellido2()+"</label><br/>");
+            out.print("<label>Edad: "+usuario_obtenido.get(i).getEdad()+"</label><br/>");
+            out.print("<label>Pais: "+usuario_obtenido.get(i).getPais()+"</label><br/>");
+            out.print("<label>Email:" + usuario_obtenido.get(i).getEmail()+"</label><br/>");
+            out.print("<input type='submit' value='Agregar a mis amigos' id='agregar_amigo'/>");
+
+        }
     }
 
     /**

@@ -246,18 +246,26 @@ public class Conexion {
     {
         this.conectar();
         this.setTx(this.getBase().beginTx());
+        try
+        {
+            Node nodoUsuario = existeNodoUsuario(correo);
 
-        Node nodoUsuario = existeNodoUsuario(correo);
-
-        Node nodoUsuarioAmigo = existeNodoUsuario(correo2);
+            Node nodoUsuarioAmigo = existeNodoUsuario(correo2);
 
 
-        this.setConexion(nodoUsuario.createRelationshipTo(nodoUsuarioAmigo, Relacion.RELACIONAMISTAD));
+            this.setConexion(nodoUsuario.createRelationshipTo(nodoUsuarioAmigo, Relacion.RELACIONAMISTAD));
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage()+"Usuario: "+correo+" relacionar con UsuarioAmigo"+correo2);
+        }
+        finally
+        {
+            this.getTx().success();
+            this.getTx().finish();
 
-        this.getTx().success();
-        this.getTx().finish();
-
-        this.desconectar(); 
+            this.desconectar();     
+        }
     }
 
 /*Comentario*/
