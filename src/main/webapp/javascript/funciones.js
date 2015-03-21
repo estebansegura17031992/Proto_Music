@@ -72,12 +72,6 @@ $(document).ready(function()
                     $("#div_resultados").html(result);
                     $("#div_resultados").on("click","#agregar_amigo",function()
                     {
-                        
-       
-                        var usuario = getUrlParameter('usuario');
-                        var palabra = $("#txtBuscar").val();
-                        var tipoBusqueda = $("#tipo_busqueda option:selected").text();
-
                         $.ajax(
                         {
                             type:'POST',
