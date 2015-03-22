@@ -26,14 +26,23 @@
                     }
                 }
             }
+            
             var usuario = getUrlParameter('usuario');
             var url_buscar = "buscar.jsp?usuario="+usuario;
+            var url_mis_amigos = "mis_amigos.jsp?usuario="+usuario;
             $(document).ready(function(){
                 $("#enlace_buscar").each(function(i){
                    $(this).attr("href",url_buscar);
+                   
                 });
             });
-            
+           
+            $(document).ready(function(){
+               
+                $("#enlace_misAmigos").each(function(i){
+                    $(this).attr("href",url_mis_amigos);
+                }); 
+            });
             
         </script>
         <title>Proto Music</title>
@@ -41,7 +50,7 @@
     <body class="body_intro">
         <div id="header">
              <ul class="ul_header">
-                <li><a href="a" id="enlace_buscar">Buscar </a> </li>
+                <li><a href="" id="enlace_buscar">Buscar </a> </li>
                 <li><a href="" id="enlace_perfl">Perfil</a> </li>
                 <li><a href="">Salir</a> </li>
             </ul>
@@ -53,7 +62,7 @@
             </div>
             <ul class="ul_menu">
                 <li><a href="">Mis Artistas</a></li>
-                <li><a href="">Mis Amigos</a></li>
+                <li><a href="" id="enlace_misAmigos">Mis Amigos</a></li>
                 <li><a href="">Fans Clubs</a></li>
                
             </ul>
