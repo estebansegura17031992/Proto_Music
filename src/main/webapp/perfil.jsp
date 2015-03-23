@@ -30,6 +30,23 @@
             var usuario = getUrlParameter('usuario');
             var url_buscar = "buscar.jsp?usuario="+usuario;
             var url_mis_amigos = "mis_amigos.jsp?usuario="+usuario;
+             $(document).ready(function()
+            {
+                $.ajax(
+                {
+                    type: 'GET',
+                    data: {usuario_amigo: usuario},
+                    url:'Controlador_SuPerfil',
+                    success:function(result)
+                    {
+                        $('#div_noticias_contenido').html(result);
+                    }
+                    
+                    
+                    
+                });
+                
+            });
             $(document).ready(function(){
                 $("#enlace_buscar").each(function(i){
                    $(this).attr("href",url_buscar);

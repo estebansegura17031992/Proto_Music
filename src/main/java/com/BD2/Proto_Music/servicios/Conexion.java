@@ -272,7 +272,7 @@ public class Conexion {
     }
 
     @SuppressWarnings("deprecation")
-	public ArrayList<Usuario> retonarAmigos(String email) 
+	public ArrayList<Usuario> retonarMisAmigos(String email) 
         {
             System.out.println("retornarAmigos de: "+email);
 		this.conectar();
@@ -282,7 +282,7 @@ public class Conexion {
                     ExecutionEngine engine = new ExecutionEngine(this.getBase());
                     ExecutionResult resultado;
                     this.setTx(this.getBase().beginTx());
-                    resultado = engine.execute("MATCH (n {email: \""+email+"\"})-[:RELACIONAMISTAD]->(p) RETURN p.email");
+                    resultado = engine.execute("MATCH (n {email: \""+email+"\"})<-[:RELACIONAMISTAD]->(p) RETURN p.email");
 
                      int i = 0;
                     
@@ -333,6 +333,66 @@ public class Conexion {
 		return amigos; 
         }
         
+        public ArrayList<Usuario> retonarSusAmigos(String email) 
+        {
+            System.out.println("retornarAmigos de: "+email);
+		this.conectar();
+                ArrayList<Usuario> amigos = new ArrayList<Usuario>();
+                try
+                {
+                    ExecutionEngine engine = new ExecutionEngine(this.getBase());
+                    ExecutionResult resultado;
+                    this.setTx(this.getBase().beginTx());
+                    resultado = engine.execute("MATCH (n {email: \""+email+"\"})<-[:RELACIONAMISTAD]->(p) RETURN p.email");
+
+                     int i = 0;
+                    
+                    for (Map<String, Object> row : resultado) 
+                    {
+                        
+                        for (Map.Entry<String, Object> column : row.entrySet()) 
+                        {
+                            
+                            String email_amigo = column.getValue().toString(); 
+                            //JOptionPane.showMessageDialog(null, email_amigo);
+
+                            Node nodo = existeNodoUsuario(email_amigo);
+                            if (nodo != null) 
+                            { 
+
+                                String nombreUsuarioObtenido = (String) nodo.getProperty("nombre");
+                                String apellido1UsuarioObtenido = (String) nodo.getProperty("apellido1");
+                                String apellido2UsuarioObtenido = (String) nodo.getProperty("apellido2");
+                                String edadUsuarioObtenido = (String) nodo.getProperty("edad");
+                                String paisUsuarioObtenido = (String) nodo.getProperty("pais"); 
+
+                                String emailUsuarioObtenido = (String) nodo.getProperty("email");
+
+                                Usuario usuario_obtenido = new Usuario(nombreUsuarioObtenido, apellido1UsuarioObtenido, apellido2UsuarioObtenido,
+                                                                        paisUsuarioObtenido, edadUsuarioObtenido, emailUsuarioObtenido);
+                                System.out.println(usuario_obtenido.getNombre()+" - "+usuario_obtenido.getEmail());
+                                amigos.add(usuario_obtenido);
+                            }
+                            
+                        } 
+                }
+                    
+                    
+                }
+                catch(Exception ex)
+                {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                }
+                
+		finally
+                {
+                    this.getTx().success();
+                    this.getTx().finish();
+                    this.desconectar();
+                }
+                System.out.println("AMIGOS:" +amigos);
+		return amigos; 
+        }
 /*Comentario*/
     public String getDirectorio() {
             return directorio; }

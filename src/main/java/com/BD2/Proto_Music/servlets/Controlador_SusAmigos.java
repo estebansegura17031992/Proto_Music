@@ -15,14 +15,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author esteban
  */
-@WebServlet(name = "Controlador_MisAmigos", urlPatterns = {"/Controlador_MisAmigos"})
-public class Controlador_MisAmigos extends HttpServlet {
+@WebServlet(name = "Controlador_SusAmigos", urlPatterns = {"/Controlador_SusAmigos"})
+public class Controlador_SusAmigos extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +40,10 @@ public class Controlador_MisAmigos extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Controlador_MisAmigos</title>");            
+            out.println("<title>Servlet Controlador_SusAmigos</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Controlador_MisAmigos at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Controlador_SusAmigos at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,11 +60,10 @@ public class Controlador_MisAmigos extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
-    {
+            throws ServletException, IOException {
         String email = request.getParameter("usuario");
         Conexion conexion = new Conexion();
-        ArrayList<Usuario> mis_amigos = conexion.retonarMisAmigos(email);
+        ArrayList<Usuario> mis_amigos = conexion.retonarSusAmigos(email);
         PrintWriter out = response.getWriter();
         if(mis_amigos.size()>0)
         {
@@ -88,7 +86,6 @@ public class Controlador_MisAmigos extends HttpServlet {
         {
             out.print("<h1>"+email+" no tiene amigos</h1>");
         }
-        
     }
 
     /**

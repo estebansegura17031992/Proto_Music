@@ -1,13 +1,13 @@
 <%-- 
-    Document   : mis_amigos
-    Created on : Mar 21, 2015, 7:47:24 PM
+    Document   : sus_amigos
+    Created on : Mar 22, 2015, 6:38:55 PM
     Author     : esteban
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-     <head>
+    <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         
         <link href="css/basic.css" rel="stylesheet" type="text/css"/>
@@ -29,10 +29,12 @@
             }
             
             var usuario = getUrlParameter('usuario');
-            var url_perfil = "perfil.jsp?usuario="+usuario;
+            var usuario_amigo = getUrlParameter('amigo')
             var url_buscar = "buscar.jsp?usuario="+usuario;
             var url_mis_amigos = "mis_amigos.jsp?usuario="+usuario;
-            $(document).ready(function(){
+            var url_perfil = "perfil.jsp?usuario="+usuario;
+            
+             $(document).ready(function(){
                 $("#enlace_perfl").each(function(i){
                    $(this).attr("href",url_perfil);
                    
@@ -56,8 +58,8 @@
                 $.ajax(
                 {
                     type:'GET',
-                    data:{usuario: usuario},
-                    url: 'Controlador_MisAmigos',
+                    data:{usuario: usuario_amigo},
+                    url: 'Controlador_SusAmigos',
 
                     success: function(result)
                     {
@@ -89,7 +91,7 @@
         </div>
         <div id="div_noticias">
             
-                <h1>Mis Amigos</h1>
+                <h1>Sus Amigos</h1>
             <div id="div_noticias_contenido">
                 
             </div>

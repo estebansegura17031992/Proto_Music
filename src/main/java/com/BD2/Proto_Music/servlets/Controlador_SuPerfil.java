@@ -15,14 +15,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author esteban
  */
-@WebServlet(name = "Controlador_MisAmigos", urlPatterns = {"/Controlador_MisAmigos"})
-public class Controlador_MisAmigos extends HttpServlet {
+@WebServlet(name = "Controlador_SuPerfil", urlPatterns = {"/Controlador_SuPerfil"})
+public class Controlador_SuPerfil extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +40,10 @@ public class Controlador_MisAmigos extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Controlador_MisAmigos</title>");            
+            out.println("<title>Servlet Controlador_SuPerfil</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Controlador_MisAmigos at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Controlador_SuPerfil at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,32 +60,23 @@ public class Controlador_MisAmigos extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
-    {
-        String email = request.getParameter("usuario");
+            throws ServletException, IOException {
+        String email_amigo = request.getParameter("usuario_amigo");
+        
         Conexion conexion = new Conexion();
-        ArrayList<Usuario> mis_amigos = conexion.retonarMisAmigos(email);
+        ArrayList<Usuario> usuario_obtenido = conexion.obtenerNodo(email_amigo);
         PrintWriter out = response.getWriter();
-        if(mis_amigos.size()>0)
+        for (int i = 0; i < usuario_obtenido.size(); i++) 
         {
-            for (int i = 0; i < mis_amigos.size(); i++) 
-            {
-                out.print("<hr/>");
-                out.print("<label><a href=\"perfil_amigo.jsp?usuario="+email+"&amigo="+mis_amigos.get(i).getEmail()+"\">"+mis_amigos.get(i).getNombre()+" "+
-                                                mis_amigos.get(i).getApellido1()+" "
-                                +mis_amigos.get(i).getApellido2()+"</a></label><br/>");
-                out.print("<label>Email:" + mis_amigos.get(i).getEmail()+"</label><br/>");
-                out.print("<label>"+mis_amigos.get(i).getEdad()+" a&ntilde;os</label><br/>");
-                out.print("<label>"+mis_amigos.get(i).getPais()+"</label><br/>");
-                out.print("<hr/>");
+            out.print("<h1> Informacion Basica</h1>");
+            out.print("<label> Nombre: "+usuario_obtenido.get(i).getNombre()+"</label><br/>");
+            out.print("<label>Apellido1: "+usuario_obtenido.get(i).getApellido1()+"</label><br/>");
+            out.print("<label>Apellido2: "+usuario_obtenido.get(i).getApellido2()+"</label><br/>");
+            out.print("<label>Edad: "+usuario_obtenido.get(i).getEdad()+"</label><br/>");
+            out.print("<label>Pais: "+usuario_obtenido.get(i).getPais()+"</label><br/>");
+            out.print("<label>Email:" + usuario_obtenido.get(i).getEmail()+"</label><br/>");
+//            out.print("<input type='submit' value='Agregar a mis amigos' id='agregar_amigo'/>");
 
-
-
-            }
-        }
-        else
-        {
-            out.print("<h1>"+email+" no tiene amigos</h1>");
         }
         
     }

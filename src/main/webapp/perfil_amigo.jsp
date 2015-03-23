@@ -1,15 +1,14 @@
 <%-- 
-    Document   : mis_amigos
-    Created on : Mar 21, 2015, 7:47:24 PM
+    Document   : perfil_amigo
+    Created on : Mar 22, 2015, 5:09:20 PM
     Author     : esteban
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-     <head>
+    <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
         <link href="css/basic.css" rel="stylesheet" type="text/css"/>
         <script src="javascript/jquery-2.1.3.js" type="text/javascript"></script>
         <script src="javascript/funciones.js" type="text/javascript"></script>
@@ -29,9 +28,33 @@
             }
             
             var usuario = getUrlParameter('usuario');
+            var usuario_amigo = getUrlParameter('amigo');
             var url_perfil = "perfil.jsp?usuario="+usuario;
             var url_buscar = "buscar.jsp?usuario="+usuario;
-            var url_mis_amigos = "mis_amigos.jsp?usuario="+usuario;
+            var url_sus_amigos = "sus_amigos.jsp?usuario="+usuario+"&amigo="+usuario_amigo;
+            $(document).ready(function(){
+                $("#enlace_perfl").each(function(i){
+                   $(this).attr("href",url_perfil);
+                   
+                });
+            });
+            $(document).ready(function()
+            {
+                $.ajax(
+                {
+                    type: 'GET',
+                    data: {usuario_amigo: usuario_amigo},
+                    url:'Controlador_SuPerfil',
+                    success:function(result)
+                    {
+                        $('#div_noticias_contenido').html(result);
+                    }
+                    
+                    
+                    
+                });
+                
+            });
             $(document).ready(function(){
                 $("#enlace_perfl").each(function(i){
                    $(this).attr("href",url_perfil);
@@ -47,24 +70,10 @@
            
             $(document).ready(function(){
                
-                $("#enlace_misAmigos").each(function(i){
-                    $(this).attr("href",url_mis_amigos);
+                $("#enlace_susAmigos").each(function(i){
+                    $(this).attr("href",url_sus_amigos);
                 }); 
             });
-            
-            $(document).ready(function(){
-                $.ajax(
-                {
-                    type:'GET',
-                    data:{usuario: usuario},
-                    url: 'Controlador_MisAmigos',
-
-                    success: function(result)
-                    {
-                        $("#div_noticias_contenido").html(result)
-                    }
-                });
-            })
             
         </script>
         <title>Proto Music</title>
@@ -83,15 +92,15 @@
                 </div>
             </div>
             <ul class="ul_menu">
-                
+                <li><a href="">Sus Artistas</a></li>
+                <li><a href="" id="enlace_susAmigos">Sus Amigos</a></li>
+                <li><a href="">Sus Fans Clubs</a></li>
                
             </ul>
         </div>
         <div id="div_noticias">
-            
-                <h1>Mis Amigos</h1>
             <div id="div_noticias_contenido">
-                
+            
             </div>
         </div>
     </body>
