@@ -1,6 +1,6 @@
 <%-- 
-    Document   : registro
-    Created on : Mar 14, 2015, 5:35:41 PM
+    Document   : registroArtista
+    Created on : Mar 24, 2015, 1:02:11 AM
     Author     : esteban
 --%>
 
@@ -17,18 +17,20 @@
         
     </head>
     <body>
-        <h1>Registro de Usuario</h1>
+        <h1>Registro de Artista o Grupo Musical</h1>
         
-        <label>Nombre</label><br/>
+        <label>Nombre del Artista/Grupo</label><br/>
         <input type="text" name="nombre" id="nombre"><br/>
-        <label>Apellido 1</label><br/>
-        <input type="text" name="apellido1" id="apellido1"><br/>
-        <label>Apellido 2</label><br/>
-        <input type="text" name="apellido2" id="apellido2"><br/>
-        <label>Edad</label><br/>
-        <input type="text" name="edad" id="edad"><br/>
+        <label>Genero</label><br/>
+        <input type="text" name="genero" id="genero"><br/>
+        <label>Sitio Web</label><br/>
+        <input type="text" name="sitioWeb" id="sitioWeb"><br/>
         <label>Pais</label><br/>
         <input type="text" name="pais" id="pais"><br/>
+        <label>Fecha de Conformacion</label><br/>
+        <input type="text" name="fechaConformacion" id="fechaConformacion"><br/>
+        <label>Estado</label><br/>
+        <input type="text" name="estado" id="estado"><br/>
         <label>Email</label><br/>
         <input type="text" name="email" id="email"><br/>
         <label>Password</label><br/>
@@ -36,8 +38,8 @@
         <label>Confirmar Password</label><br/>
         <input type="password" name="confirmPassword" id="confirmPassword"><br/>
         
-        <input type="submit" id="RegistrarUsuario" value="Registrar" >
+        <input type="submit" id="RegistrarArtista" value="Registrar" >
         <hr/>
-        <a href="registroArtista.jsp">¿Eres un artista o un grupo musical?</a>
+        <a href="registroUsuario.jsp">¿Eres un usuario?</a>
     </body>
 </html>

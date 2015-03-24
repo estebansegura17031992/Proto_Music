@@ -5,7 +5,7 @@
  */
 package com.BD2.Proto_Music.servlets;
 
-import com.BD2.Proto_Music.negocios.Usuario;
+import com.BD2.Proto_Music.negocios.Artista;
 import com.BD2.Proto_Music.servicios.Conexion;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author esteban
  */
-@WebServlet(name = "Controlador_Buscar", urlPatterns = {"/Controlador_Buscar"})
-public class Controlador_Buscar extends HttpServlet {
+@WebServlet(name = "Controlador_PerfilArtista", urlPatterns = {"/Controlador_PerfilArtista"})
+public class Controlador_PerfilArtista extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +40,10 @@ public class Controlador_Buscar extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Controlador_Buscar</title>");            
+            out.println("<title>Servlet Controlador_PerfilArtista</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Controlador_Buscar at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Controlador_PerfilArtista at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,54 +60,26 @@ public class Controlador_Buscar extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
-    {
-        response.setContentType("text/plain");
+            throws ServletException, IOException {
         String usuario = request.getParameter("usuario");
-        String palabra = request.getParameter("palabra");
-        String tipoBusqueda = request.getParameter("tipoBusqueda");
-
-        Conexion conexionNeo4j = new Conexion();
-        ArrayList<Usuario> usuario_obtenido=null;
-        System.out.println("aqui: "+tipoBusqueda);
-        if(tipoBusqueda.equals("Amigos"))
-        {
-            usuario_obtenido = conexionNeo4j.obtenerNodo(palabra);
-        
-        }
-        else if(tipoBusqueda.equals("Artistas"))
-        {
-            System.out.println("Buscando artistas");
-            //usuario_obtenido = conexionNeo4j.obtenerNodo_Artista(palabra);
-        }
-        System.out.println("salgo aqui");
+        Conexion conexion = new Conexion();
+        ArrayList<Artista> mis_artistas = conexion.obtenerNodo_Artista(usuario);
         PrintWriter out = response.getWriter();
-        if(usuario_obtenido!=null)
+        if(mis_artistas.size()>0)
         {
-            
-            for (int i = 0; i < usuario_obtenido.size(); i++) 
+            for (int i = 0; i < mis_artistas.size(); i++) 
             {
-                out.print("<label> Nombre: "+usuario_obtenido.get(i).getNombre()+"</label><br/>");
-                out.print("<label>Apellido1: "+usuario_obtenido.get(i).getApellido1()+"</label><br/>");
-                out.print("<label>Apellido2: "+usuario_obtenido.get(i).getApellido2()+"</label><br/>");
-                out.print("<label>Edad: "+usuario_obtenido.get(i).getEdad()+"</label><br/>");
-                out.print("<label>Pais: "+usuario_obtenido.get(i).getPais()+"</label><br/>");
-                out.print("<label>Email:" + usuario_obtenido.get(i).getEmail()+"</label><br/>");
-                if(tipoBusqueda.equals("Amigos"))
-                {
-                    out.print("<input type='submit' value='Agregar a mis amigos' id='agregar_amigo'/>");
-                }
-                else if(tipoBusqueda.equals("Artistas"))
-                {
-                    out.print("<input type='submit' value='Seguir' id='agregar_artista'/>");
-                }
+                out.print("<label>Nombre: "+mis_artistas.get(i).getNombre()+"</label><br/>");
+                out.print("<label>Genero: "+mis_artistas.get(i).getGenero()+"</label><br/>");
+                out.print("<label>Pais: "+mis_artistas.get(i).getPais()+"</label><br/>");
+                out.print("<label>Estado: "+mis_artistas.get(i).getEstado()+"</label><br/>");
+                out.print("<label>Fecha de Conformacion: "+mis_artistas.get(i).getFechaConformacion()+"</label><br/>");
+                out.print("<label>Sitio Web: "+mis_artistas.get(i).getSitioWeb()+"</label><br/>");
+                out.print("<label>Email: "+mis_artistas.get(i).getEmail()+"</label>");
+
             }
         }
-        else
-        {
-            out.print("<label>No se encontraron resultados</label>");
-            
-        }}
+    }
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -120,8 +92,7 @@ public class Controlador_Buscar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            
-            
+        processRequest(request, response);
     }
 
     /**

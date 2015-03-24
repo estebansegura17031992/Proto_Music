@@ -76,14 +76,28 @@ public class Controlador_Identificacion extends HttpServlet {
             throws ServletException, IOException {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            
-            
+            String tipo = request.getParameter("tipo");
+            boolean autentificacion=false;
             Conexion conexionNeo4j = new Conexion();
-            
-            boolean autentificacion = conexionNeo4j.autentificar(email, password);
-            
+            if(tipo.equals("Usuario"))
+            {
+                System.out.println("autenticacion usuario");
+                autentificacion = conexionNeo4j.autentificarUsuario(email, password);
+            }
+            else
+            {
+                autentificacion = conexionNeo4j.autentificarArtista(email, password);
+            }
             PrintWriter out = response.getWriter();
-            out.print("Accion" + autentificacion);
+            if(autentificacion==true)
+            {
+                out.print(tipo);
+            }
+            else
+            {
+                out.print("invalido");
+            }
+            
             
     }
 

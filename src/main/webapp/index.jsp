@@ -20,6 +20,13 @@
         <h1>Proto Music</h1>
         <fieldset>
             <legend>Login</legend>
+            <label>Tipo</label><br/>
+            <label>Usuario</label>
+            <input id="usuario" type="radio" name="tipo" value="Usuario">
+            <label>Artista</label>
+            <input id="artista" type="radio" name="tipo" value="Artista">
+            
+            <br/>
             <label>Correo</label><br/>
             <input type="text" name="email" id="email_index"><br/>
             <label>Password</label><br/>
