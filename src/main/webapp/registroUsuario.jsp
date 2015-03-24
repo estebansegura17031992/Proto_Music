@@ -33,7 +33,6 @@
         <select name="tipo" id="tipo">
             <option value="Usuario">Usuario</option>
             <option value="Artista">Artista</option>
-            <option value="Fan Club">FanClub</option>
         </select><br/>
         <label>Email</label><br/>
         <input type="text" name="email" id="email"><br/>

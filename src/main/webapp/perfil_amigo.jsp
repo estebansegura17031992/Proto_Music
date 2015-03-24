@@ -26,18 +26,15 @@
                     }
                 }
             }
-            
+            /*VARIABLES*/
             var usuario = getUrlParameter('usuario');
             var usuario_amigo = getUrlParameter('amigo');
             var url_perfil = "perfil.jsp?usuario="+usuario;
             var url_buscar = "buscar.jsp?usuario="+usuario;
             var url_sus_amigos = "sus_amigos.jsp?usuario="+usuario+"&amigo="+usuario_amigo;
-            $(document).ready(function(){
-                $("#enlace_perfl").each(function(i){
-                   $(this).attr("href",url_perfil);
-                   
-                });
-            });
+            var url_sus_artistas = "sus_artistas.jsp?usuario="+usuario+"&amigo="+usuario_amigo;
+            
+            /*CARGAR INFORMACION EN LA PAGINA*/
             $(document).ready(function()
             {
                 $.ajax(
@@ -55,6 +52,9 @@
                 });
                 
             });
+            
+            /*-------------------------------*/
+            /*LINKS DEL PERFIL PRINCIPAL*/
             $(document).ready(function(){
                 $("#enlace_perfl").each(function(i){
                    $(this).attr("href",url_perfil);
@@ -68,13 +68,21 @@
                 });
             });
            
+           /*---------------------------------------------------*/
+           /*LINK DEL PERFIL LATERAL*/
             $(document).ready(function(){
                
                 $("#enlace_susAmigos").each(function(i){
                     $(this).attr("href",url_sus_amigos);
                 }); 
             });
-            
+            $(document).ready(function(){
+               
+                $("#enlace_susArtistas").each(function(i){
+                    $(this).attr("href",url_sus_artistas);
+                }); 
+            });
+            /*-------------*/
         </script>
         <title>Proto Music</title>
     </head>
@@ -92,7 +100,7 @@
                 </div>
             </div>
             <ul class="ul_menu">
-                <li><a href="">Sus Artistas</a></li>
+                <li><a href="" id="enlace_susArtistas">Sus Artistas</a></li>
                 <li><a href="" id="enlace_susAmigos">Sus Amigos</a></li>
                 <li><a href="">Sus Fans Clubs</a></li>
                

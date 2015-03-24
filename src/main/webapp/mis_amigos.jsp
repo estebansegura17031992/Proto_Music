@@ -32,6 +32,7 @@
             var url_perfil = "perfil.jsp?usuario="+usuario;
             var url_buscar = "buscar.jsp?usuario="+usuario;
             var url_mis_amigos = "mis_amigos.jsp?usuario="+usuario;
+            var url_mis_artistas = "mis_artistas.jsp?usuario="+usuario;
             $(document).ready(function(){
                 $("#enlace_perfl").each(function(i){
                    $(this).attr("href",url_perfil);
@@ -49,6 +50,13 @@
                
                 $("#enlace_misAmigos").each(function(i){
                     $(this).attr("href",url_mis_amigos);
+                }); 
+            });
+            
+            $(document).ready(function(){
+               
+                $("#enlace_misArtistas").each(function(i){
+                    $(this).attr("href",url_mis_artistas);
                 }); 
             });
             
@@ -71,17 +79,19 @@
     </head>
     <body class="body_intro">
         <div id="header">
-             <ul class="ul_header">
+             <ul class="ul_header" >
                 <li><a href="" id="enlace_buscar">Buscar </a> </li>
                 <li><a href="" id="enlace_perfl">Perfil</a> </li>
                 <li><a href="">Salir</a> </li>
             </ul>
         </div>
         <div id="menu">
-            <div id="info">
-                <div id="info">
-                </div>
-            </div>
+            <ul class="ul_menu">
+                <li><a href="" id="enlace_misArtistas">Mis Artistas</a></li>
+                <li><a href="" id="enlace_misAmigos">Mis Amigos</a></li>
+                <li><a href="">Fans Clubs</a></li>
+               
+            </ul>
             <ul class="ul_menu">
                 
                

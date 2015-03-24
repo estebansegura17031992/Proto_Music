@@ -32,6 +32,7 @@
             var usuario_amigo = getUrlParameter('amigo')
             var url_buscar = "buscar.jsp?usuario="+usuario;
             var url_mis_amigos = "mis_amigos.jsp?usuario="+usuario;
+            var url_mis_artistas = "mis_artistas.jsp?usuario="+usuario;
             var url_perfil = "perfil.jsp?usuario="+usuario;
             
              $(document).ready(function(){
@@ -55,10 +56,17 @@
             });
             
             $(document).ready(function(){
+               
+                $("#enlace_misArtistas").each(function(i){
+                    $(this).attr("href",url_mis_artistas);
+                }); 
+            });
+            
+            $(document).ready(function(){
                 $.ajax(
                 {
                     type:'GET',
-                    data:{usuario: usuario_amigo},
+                    data:{usuario: usuario, usuario_amigo: usuario_amigo},
                     url: 'Controlador_SusAmigos',
 
                     success: function(result)
@@ -84,10 +92,11 @@
                 <div id="info">
                 </div>
             </div>
-            <ul class="ul_menu">
-                
+           <ul class="ul_menu">
+                <li><a href="" id="enlace_misArtistas">Mis Artistas</a></li>
+                <li><a href="" id="enlace_misAmigos">Mis Amigos</a></li>
                
-            </ul>
+                </ul>
         </div>
         <div id="div_noticias">
             

@@ -5,9 +5,11 @@
  */
 package com.BD2.Proto_Music.servlets;
 
+import com.BD2.Proto_Music.negocios.Usuario;
 import com.BD2.Proto_Music.servicios.Conexion;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author esteban
  */
-@WebServlet(name = "Controlador_Registro", urlPatterns = {"/Controlador_Registro"})
-public class Controlador_Registro extends HttpServlet {
+@WebServlet(name = "Controlador_SusArtistas", urlPatterns = {"/Controlador_SusArtistas"})
+public class Controlador_SusArtistas extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,20 +35,17 @@ public class Controlador_Registro extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Controlador_Registro</title>");            
+            out.println("<title>Servlet Controlador_SusArtistas</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Controlador_Registro at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Controlador_SusArtistas at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-        } finally {
-            out.close();
         }
     }
 
@@ -62,7 +61,29 @@ public class Controlador_Registro extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String usuario = request.getParameter("usuario");
+        String usuario_amigo = request.getParameter("usuario_amigo");
+        Conexion conexion = new Conexion();
+        ArrayList<Usuario> mis_artistas = conexion.retonarSusArtistas(usuario_amigo);
+        PrintWriter out = response.getWriter();
+        if(mis_artistas.size()>0)
+        {
+            for (int i = 0; i < mis_artistas.size(); i++) 
+            {
+                out.print("<hr/>");
+                out.print("<label><a href=\"perfil_artista.jsp?usuario="+usuario+"&artista="+mis_artistas.get(i).getEmail()+"\">"+
+                        mis_artistas.get(i).getNombre()+"</a></label><br/>");
+                out.print("<label>"+mis_artistas.get(i).getPais()+"</label><br/>");
+                out.print("<hr/>");
+
+
+
+            }
+        }
+        else
+        {
+           out.print("<h1>"+usuario_amigo+" no sigue a ningun artista</h1>");
+        }
     }
 
     /**
@@ -76,21 +97,7 @@ public class Controlador_Registro extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            response.setContentType("text/plain");
-            String nombre = request.getParameter("nombre");
-            String apellido1 = request.getParameter("apellido1");
-            String apellido2 = request.getParameter("apellido2");
-            String edad = request.getParameter("edad");
-            String pais = request.getParameter("pais");
-            String tipo = request.getParameter("tipo");
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-            String confirmPassword = request.getParameter("confirmPassword");
-            
-            Conexion conexionNeo4j = new Conexion();
-            conexionNeo4j.anadirNodo_Usuario(nombre, apellido1, apellido2, edad, pais,tipo, email, password);
-            PrintWriter out = response.getWriter();
-            out.print("Hello " + nombre);
+        processRequest(request, response);
     }
 
     /**

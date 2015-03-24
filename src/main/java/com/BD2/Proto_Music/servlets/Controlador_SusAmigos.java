@@ -61,16 +61,17 @@ public class Controlador_SusAmigos extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("usuario");
+        String usuario = request.getParameter("usuario");
+        String usuario_amigo = request.getParameter("usuario_amigo");
         Conexion conexion = new Conexion();
-        ArrayList<Usuario> mis_amigos = conexion.retonarSusAmigos(email);
+        ArrayList<Usuario> mis_amigos = conexion.retonarSusAmigos(usuario_amigo);
         PrintWriter out = response.getWriter();
         if(mis_amigos.size()>0)
         {
             for (int i = 0; i < mis_amigos.size(); i++) 
             {
                 out.print("<hr/>");
-                out.print("<label><a href=\"perfil_amigo.jsp?usuario="+email+"&amigo="+mis_amigos.get(i).getEmail()+"\">"+mis_amigos.get(i).getNombre()+" "+
+                out.print("<label><a href=\"perfil_amigo.jsp?usuario="+usuario+"&amigo="+mis_amigos.get(i).getEmail()+"\">"+mis_amigos.get(i).getNombre()+" "+
                                                 mis_amigos.get(i).getApellido1()+" "
                                 +mis_amigos.get(i).getApellido2()+"</a></label><br/>");
                 out.print("<label>Email:" + mis_amigos.get(i).getEmail()+"</label><br/>");
@@ -84,7 +85,7 @@ public class Controlador_SusAmigos extends HttpServlet {
         }
         else
         {
-            out.print("<h1>"+email+" no tiene amigos</h1>");
+            out.print("<h1>"+usuario_amigo+" no tiene amigos</h1>");
         }
     }
 

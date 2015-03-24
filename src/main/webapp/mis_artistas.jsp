@@ -1,6 +1,6 @@
 <%-- 
-    Document   : buscar
-    Created on : Mar 18, 2015, 12:27:57 AM
+    Document   : mis_artistas
+    Created on : Mar 23, 2015, 7:51:43 PM
     Author     : esteban
 --%>
 
@@ -8,10 +8,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
         <link href="css/basic.css" rel="stylesheet" type="text/css"/>
         <script src="javascript/jquery-2.1.3.js" type="text/javascript"></script>
         <script src="javascript/funciones.js" type="text/javascript"></script>
-        
         <script>
             function getUrlParameter(sParam)
             {
@@ -26,9 +27,10 @@
                     }
                 }
             }
+            
             var usuario = getUrlParameter('usuario');
             var url_perfil = "perfil.jsp?usuario="+usuario;
-            var url_buscar = "buscar_amigos.jsp?usuario="+usuario+"&tipo=Amigos";
+            var url_buscar = "buscar.jsp?usuario="+usuario;
             var url_mis_amigos = "mis_amigos.jsp?usuario="+usuario;
             var url_mis_artistas = "mis_artistas.jsp?usuario="+usuario;
             $(document).ready(function(){
@@ -37,9 +39,35 @@
                    
                 });
             });
+            $(document).ready(function(){
+                $("#enlace_buscar").each(function(i){
+                   $(this).attr("href",url_buscar);
+                   
+                });
+            });
+           
+            $(document).ready(function(){
+               
+                $("#enlace_misAmigos").each(function(i){
+                    $(this).attr("href",url_mis_amigos);
+                }); 
+            });
+            
+            $(document).ready(function(){
+                $.ajax(
+                {
+                    type:'GET',
+                    data:{usuario: usuario},
+                    url: 'Controlador_MisArtistas',
+
+                    success: function(result)
+                    {
+                        $("#div_noticias_contenido").html(result)
+                    }
+                });
+            })
             
         </script>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Proto Music</title>
     </head>
     <body class="body_intro">
@@ -50,33 +78,18 @@
                 <li><a href="">Salir</a> </li>
             </ul>
         </div>
-        
-         <div id="menu">
-            <div id="info">
-                <div id="info">
-                </div>
-            </div>
+        <div id="menu">
             <ul class="ul_menu">
-                <li><a href="" id="enlace_ul_menu_Artista">Artistas</a></li>
-                <li><a href="" id="enlace_ul_menu_Amigos">Amigos</a></li>
-                <li><a href="" id="enlace_ul_menu_Fans">Fans Clubs</a></li>
-                <li><a href="" id="enlace_ul_menu_Todo">Todo</a></li>
-                
+                <li><a href="" id="enlace_misArtistas">Mis Artistas</a></li>
+                <li><a href="" id="enlace_misAmigos">Mis Amigos</a></li>
+                <li><a href="">Fans Clubs</a></li>
+               
             </ul>
         </div>
         <div id="div_noticias">
+            
+                <h1>Mis Artistas</h1>
             <div id="div_noticias_contenido">
-                <label>Buscar:</label><br/>
-                <select id="tipo_busqueda">
-                    <option>Artistas</option>
-                    <option>Amigos</option>
-                    <option>Fans Clubs</option>
-                    <option>Todos</option>
-                </select><br/>
-                <input type="text" id="txtBuscar"/><br/>
-                <input type="submit" id="buscarPalabra" value="Buscar"/>
-            </div>
-            <div id="div_resultados">
                 
             </div>
         </div>

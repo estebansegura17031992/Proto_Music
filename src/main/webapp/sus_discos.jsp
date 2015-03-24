@@ -1,6 +1,6 @@
 <%-- 
-    Document   : buscar_amigos
-    Created on : Mar 19, 2015, 11:03:23 PM
+    Document   : sus_discos
+    Created on : Mar 23, 2015, 10:34:59 PM
     Author     : esteban
 --%>
 

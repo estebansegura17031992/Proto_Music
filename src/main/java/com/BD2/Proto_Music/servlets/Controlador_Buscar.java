@@ -68,23 +68,46 @@ public class Controlador_Buscar extends HttpServlet {
         String tipoBusqueda = request.getParameter("tipoBusqueda");
 
         Conexion conexionNeo4j = new Conexion();
-        System.out.println("aqui");
-        ArrayList<Usuario> usuario_obtenido = conexionNeo4j.obtenerNodo(palabra);
-        //conexionNeo4j.relacionarAmigos(usuario, palabra);
+        ArrayList<Usuario> usuario_obtenido=null;
+        System.out.println("aqui: "+tipoBusqueda);
+        if(tipoBusqueda.equals("Amigos"))
+        {
+            usuario_obtenido = conexionNeo4j.obtenerNodo(palabra);
+        
+        }
+        else if(tipoBusqueda.equals("Artistas"))
+        {
+            System.out.println("Buscando artistas");
+            usuario_obtenido = conexionNeo4j.obtenerNodo_Artista(palabra);
+        }
         System.out.println("salgo aqui");
         PrintWriter out = response.getWriter();
-        for (int i = 0; i < usuario_obtenido.size(); i++) 
+        if(usuario_obtenido!=null)
         {
-            out.print("<label> Nombre: "+usuario_obtenido.get(i).getNombre()+"</label><br/>");
-            out.print("<label>Apellido1: "+usuario_obtenido.get(i).getApellido1()+"</label><br/>");
-            out.print("<label>Apellido2: "+usuario_obtenido.get(i).getApellido2()+"</label><br/>");
-            out.print("<label>Edad: "+usuario_obtenido.get(i).getEdad()+"</label><br/>");
-            out.print("<label>Pais: "+usuario_obtenido.get(i).getPais()+"</label><br/>");
-            out.print("<label>Email:" + usuario_obtenido.get(i).getEmail()+"</label><br/>");
-            out.print("<input type='submit' value='Agregar a mis amigos' id='agregar_amigo'/>");
-
+            
+            for (int i = 0; i < usuario_obtenido.size(); i++) 
+            {
+                out.print("<label> Nombre: "+usuario_obtenido.get(i).getNombre()+"</label><br/>");
+                out.print("<label>Apellido1: "+usuario_obtenido.get(i).getApellido1()+"</label><br/>");
+                out.print("<label>Apellido2: "+usuario_obtenido.get(i).getApellido2()+"</label><br/>");
+                out.print("<label>Edad: "+usuario_obtenido.get(i).getEdad()+"</label><br/>");
+                out.print("<label>Pais: "+usuario_obtenido.get(i).getPais()+"</label><br/>");
+                out.print("<label>Email:" + usuario_obtenido.get(i).getEmail()+"</label><br/>");
+                if(tipoBusqueda.equals("Amigos"))
+                {
+                    out.print("<input type='submit' value='Agregar a mis amigos' id='agregar_amigo'/>");
+                }
+                else if(tipoBusqueda.equals("Artistas"))
+                {
+                    out.print("<input type='submit' value='Seguir' id='agregar_artista'/>");
+                }
+            }
         }
-    }
+        else
+        {
+            out.print("<label>No se encontraron resultados</label>");
+            
+        }}
 
     /**
      * Handles the HTTP <code>POST</code> method.

@@ -212,6 +212,23 @@ public class Conexion {
         } 
     }
 
+    private Node existeNodoAmigo(String email) 
+    { 
+        //Se realiza la consulta a la base de datos para comprobar la existencia del nodo
+        Label label_usuario = DynamicLabel.label("Amigo"); 
+        ResourceIterator<Node> res = this.getBase().findNodesByLabelAndProperty(label_usuario,
+                "email", email).iterator();
+        if (res.hasNext()) 
+        {
+                Node bdNodo = res.next();
+                return bdNodo;
+        }
+        else 
+        {
+                return null;
+        } 
+    }
+    
     @SuppressWarnings("deprecation")
     public ArrayList<Usuario> obtenerNodo(String email) 
     {
@@ -220,6 +237,57 @@ public class Conexion {
             this.setTx(this.getBase().beginTx());
 
             Node nodo = existeNodoUsuario(email);
+            if (nodo != null) 
+            { 
+                
+                String nombreUsuarioObtenido = (String) nodo.getProperty("nombre");
+                String apellido1UsuarioObtenido = (String) nodo.getProperty("apellido1");
+                String apellido2UsuarioObtenido = (String) nodo.getProperty("apellido2");
+                String edadUsuarioObtenido = (String) nodo.getProperty("edad");
+                String paisUsuarioObtenido = (String) nodo.getProperty("pais"); 
+                
+                String emailUsuarioObtenido = (String) nodo.getProperty("email");
+                
+                Usuario usuario_obtenido = new Usuario(nombreUsuarioObtenido, apellido1UsuarioObtenido, apellido2UsuarioObtenido,
+                                                        paisUsuarioObtenido, edadUsuarioObtenido, emailUsuarioObtenido);
+                
+                lista.add(usuario_obtenido);
+            }
+
+            this.getTx().success();
+            this.getTx().finish();
+
+            this.desconectar();
+            return lista; 
+    }
+    
+     private Node existeNodoArtista(String email) 
+    { 
+        System.out.println("Artistas");
+        //Se realiza la consulta a la base de datos para comprobar la existencia del nodo
+        Label label_usuario = DynamicLabel.label("Artista"); 
+        ResourceIterator<Node> res = this.getBase().findNodesByLabelAndProperty(label_usuario,
+                "email", email).iterator();
+        if (res.hasNext()) 
+        {
+                Node bdNodo = res.next();
+                System.out.println("estoy en existeNodoArtista");
+                return bdNodo;
+        }
+        else 
+        {
+                return null;
+        } 
+    }
+     
+    @SuppressWarnings("deprecation")
+    public ArrayList<Usuario> obtenerNodo_Artista(String email) 
+    {
+            ArrayList<Usuario> lista = new ArrayList<Usuario>(); 
+            this.conectar();
+            this.setTx(this.getBase().beginTx());
+
+            Node nodo = existeNodoArtista(email);
             if (nodo != null) 
             { 
                 
@@ -271,6 +339,33 @@ public class Conexion {
         }
     }
 
+     @SuppressWarnings("deprecation")
+    public void relacionarArtista(String correo, String correo2) 
+    {
+        this.conectar();
+        this.setTx(this.getBase().beginTx());
+        try
+        {
+            Node nodoUsuario = existeNodoUsuario(correo);
+
+            Node nodoUsuarioArtista = existeNodoArtista(correo2);
+
+
+            this.setConexion(nodoUsuario.createRelationshipTo(nodoUsuarioArtista, Relacion.SIGUE));
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage()+"Usuario: "+correo+" relacionar con Artista"+correo2);
+        }
+        finally
+        {
+            this.getTx().success();
+            this.getTx().finish();
+
+            this.desconectar();     
+        }
+    }
+    
     @SuppressWarnings("deprecation")
 	public ArrayList<Usuario> retonarMisAmigos(String email) 
         {
@@ -392,6 +487,189 @@ public class Conexion {
                 }
                 System.out.println("AMIGOS:" +amigos);
 		return amigos; 
+        }
+        
+        @SuppressWarnings("deprecation")
+	public ArrayList<Usuario> retonarMisArtistas(String email) 
+        {
+            System.out.println("retornarArtistas de: "+email);
+		this.conectar();
+                ArrayList<Usuario> amigos = new ArrayList<Usuario>();
+                try
+                {
+                    ExecutionEngine engine = new ExecutionEngine(this.getBase());
+                    ExecutionResult resultado;
+                    this.setTx(this.getBase().beginTx());
+                    resultado = engine.execute("MATCH (n {email: \""+email+"\"})-[:SIGUE]->(p) RETURN p.email");
+
+                     int i = 0;
+                    
+                    for (Map<String, Object> row : resultado) 
+                    {
+                        
+                        for (Map.Entry<String, Object> column : row.entrySet()) 
+                        {
+                            
+                            String email_amigo = column.getValue().toString(); 
+                            //JOptionPane.showMessageDialog(null, email_amigo);
+
+                            Node nodo = existeNodoArtista(email_amigo);
+                            if (nodo != null) 
+                            { 
+
+                                String nombreUsuarioObtenido = (String) nodo.getProperty("nombre");
+                                String apellido1UsuarioObtenido = (String) nodo.getProperty("apellido1");
+                                String apellido2UsuarioObtenido = (String) nodo.getProperty("apellido2");
+                                String edadUsuarioObtenido = (String) nodo.getProperty("edad");
+                                String paisUsuarioObtenido = (String) nodo.getProperty("pais"); 
+
+                                String emailUsuarioObtenido = (String) nodo.getProperty("email");
+
+                                Usuario usuario_obtenido = new Usuario(nombreUsuarioObtenido, apellido1UsuarioObtenido, apellido2UsuarioObtenido,
+                                                                        paisUsuarioObtenido, edadUsuarioObtenido, emailUsuarioObtenido);
+                                System.out.println(usuario_obtenido.getNombre()+" - "+usuario_obtenido.getEmail());
+                                amigos.add(usuario_obtenido);
+                            }
+                            
+                        } 
+                }
+                    
+                    
+                }
+                catch(Exception ex)
+                {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                }
+                
+		finally
+                {
+                    this.getTx().success();
+                    this.getTx().finish();
+                    this.desconectar();
+                }
+                System.out.println("AMIGOS:" +amigos);
+		return amigos; 
+        }
+        
+        public ArrayList<Usuario> retonarSusArtistas(String email) 
+        {
+            System.out.println("retornarArtistas de: "+email);
+		this.conectar();
+                ArrayList<Usuario> artistas = new ArrayList<Usuario>();
+                try
+                {
+                    ExecutionEngine engine = new ExecutionEngine(this.getBase());
+                    ExecutionResult resultado;
+                    this.setTx(this.getBase().beginTx());
+                    resultado = engine.execute("MATCH (n {email: \""+email+"\"})-[:SIGUE]->(p) RETURN p.email");
+
+                     int i = 0;
+                    
+                    for (Map<String, Object> row : resultado) 
+                    {
+                        
+                        for (Map.Entry<String, Object> column : row.entrySet()) 
+                        {
+                            
+                            String email_amigo = column.getValue().toString(); 
+                            //JOptionPane.showMessageDialog(null, email_amigo);
+
+                            Node nodo = existeNodoArtista(email_amigo);
+                            if (nodo != null) 
+                            { 
+
+                                String nombreUsuarioObtenido = (String) nodo.getProperty("nombre");
+                                String apellido1UsuarioObtenido = (String) nodo.getProperty("apellido1");
+                                String apellido2UsuarioObtenido = (String) nodo.getProperty("apellido2");
+                                String edadUsuarioObtenido = (String) nodo.getProperty("edad");
+                                String paisUsuarioObtenido = (String) nodo.getProperty("pais"); 
+
+                                String emailUsuarioObtenido = (String) nodo.getProperty("email");
+
+                                Usuario usuario_obtenido = new Usuario(nombreUsuarioObtenido, apellido1UsuarioObtenido, apellido2UsuarioObtenido,
+                                                                        paisUsuarioObtenido, edadUsuarioObtenido, emailUsuarioObtenido);
+                                System.out.println(usuario_obtenido.getNombre()+" - "+usuario_obtenido.getEmail());
+                                artistas.add(usuario_obtenido);
+                            }
+                            
+                        } 
+                }
+                    
+                    
+                }
+                catch(Exception ex)
+                {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                }
+                
+		finally
+                {
+                    this.getTx().success();
+                    this.getTx().finish();
+                    this.desconectar();
+                }
+                System.out.println("ARTISTAS:" +artistas);
+		return artistas; 
+        }
+        
+        public ArrayList<Usuario> retonarSusSeguidores(String nombreArtista)
+        {
+            this.conectar();
+                ArrayList<Usuario> artistas = new ArrayList<Usuario>();
+                try
+                {
+                    ExecutionEngine engine = new ExecutionEngine(this.getBase());
+                    ExecutionResult resultado;
+                    this.setTx(this.getBase().beginTx());
+                    resultado = engine.execute("MATCH (n {nombre: \""+nombreArtista+"\"})<-[:SIGUE]-(p) RETURN p.email");
+
+                     int i = 0;
+                    
+                    for (Map<String, Object> row : resultado) 
+                    {
+                        
+                        for (Map.Entry<String, Object> column : row.entrySet()) 
+                        {
+                            
+                            String email_amigo = column.getValue().toString(); 
+                            //JOptionPane.showMessageDialog(null, email_amigo);
+
+                            Node nodo = existeNodoUsuario(email_amigo);
+                            if (nodo != null) 
+                            { 
+
+                                String nombreUsuarioObtenido = (String) nodo.getProperty("nombre");
+                                String apellido1UsuarioObtenido = (String) nodo.getProperty("apellido1");
+                                String apellido2UsuarioObtenido = (String) nodo.getProperty("apellido2");
+                                String edadUsuarioObtenido = (String) nodo.getProperty("edad");
+                                String paisUsuarioObtenido = (String) nodo.getProperty("pais"); 
+
+                                String emailUsuarioObtenido = (String) nodo.getProperty("email");
+
+                                Usuario usuario_obtenido = new Usuario(nombreUsuarioObtenido, apellido1UsuarioObtenido, apellido2UsuarioObtenido,
+                                                                        paisUsuarioObtenido, edadUsuarioObtenido, emailUsuarioObtenido);
+                                System.out.println(usuario_obtenido.getNombre()+" - "+usuario_obtenido.getEmail());
+                                artistas.add(usuario_obtenido);
+                            }
+                            
+                        } 
+                }
+                    
+                    
+                }
+                catch(Exception ex)
+                {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                }
+                
+		finally
+                {
+                    this.getTx().success();
+                    this.getTx().finish();
+                    this.desconectar();
+                }
+                System.out.println("ARTISTAS:" +artistas);
+		return artistas; 
         }
 /*Comentario*/
     public String getDirectorio() {

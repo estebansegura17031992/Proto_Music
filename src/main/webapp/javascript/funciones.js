@@ -86,6 +86,23 @@ $(document).ready(function()
            
        
                     });
+                    
+                    $("#div_resultados").on("click","#agregar_artista",function()
+                    {
+                        $.ajax(
+                        {
+                            type:'POST',
+                            data:{usuario: usuario,palabra: palabra, tipoBusqueda: tipoBusqueda},
+                            url: 'Controlador_Relacionar',
+
+                            success: function(result)
+                            {
+                                alert("Artista Agregado");
+                            }
+                        });
+           
+       
+                    });
                 }
             });
            

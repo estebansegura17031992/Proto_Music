@@ -1,6 +1,6 @@
 <%-- 
-    Document   : menu_principal
-    Created on : Mar 15, 2015, 10:21:30 PM
+    Document   : perfil_artista
+    Created on : Mar 23, 2015, 9:03:04 PM
     Author     : esteban
 --%>
 
@@ -27,17 +27,22 @@
                 }
             }
             
+            /*VARIABLES DINAMICAS*/
             var usuario = getUrlParameter('usuario');
+            var artista = getUrlParameter('artista');
+            var url_perfil = "perfil.jsp?usuario="+usuario;
             var url_buscar = "buscar.jsp?usuario="+usuario;
-            var url_mis_amigos = "mis_amigos.jsp?usuario="+usuario;
-            var url_mis_artistas = "mis_artistas.jsp?usuario="+usuario;
-             $(document).ready(function()
+            var url_sus_seguidores = "sus_seguidores.jsp?usuario="+usuario+"&artista="+artista;
+            var url_sus_discos = "sus_discos.jsp?usuario="+usuario+"&artista="+artista;
+           
+           /*CARGAR INFORMACION EN LA PAGINA*/
+            $(document).ready(function()
             {
                 $.ajax(
                 {
                     type: 'GET',
-                    data: {usuario_amigo: usuario},
-                    url:'Controlador_SuPerfil',
+                    data: {artista: artista},
+                    url:'Controlador_SuPerfilArtista',
                     success:function(result)
                     {
                         $('#div_noticias_contenido').html(result);
@@ -48,27 +53,36 @@
                 });
                 
             });
+            /*------------------------------------*/
+            /*LINKS DEL PERFIL PRINCIPAL*/
+            $(document).ready(function(){
+                $("#enlace_perfl").each(function(i){
+                   $(this).attr("href",url_perfil);
+                   
+                });
+            });
             $(document).ready(function(){
                 $("#enlace_buscar").each(function(i){
                    $(this).attr("href",url_buscar);
                    
                 });
             });
-           
+           /*---------------------------------------------------*/
+           /*LINK DEL PERFIL LATERAL*/
             $(document).ready(function(){
                
-                $("#enlace_misAmigos").each(function(i){
-                    $(this).attr("href",url_mis_amigos);
+                $("#enlace_susSeguidores").each(function(i){
+                    $(this).attr("href",url_sus_seguidores);
                 }); 
             });
             
             $(document).ready(function(){
                
-                $("#enlace_misArtistas").each(function(i){
-                    $(this).attr("href",url_mis_artistas);
+                $("#enlace_susDiscos").each(function(i){
+                    $(this).attr("href",url_sus_discos);
                 }); 
             });
-            
+            /*----------------------------------------------------*/
         </script>
         <title>Proto Music</title>
     </head>
@@ -81,9 +95,13 @@
             </ul>
         </div>
         <div id="menu">
+            <div id="info">
+                <div id="info">
+                </div>
+            </div>
             <ul class="ul_menu">
-                <li><a href="" id="enlace_misArtistas">Mis Artistas</a></li>
-                <li><a href="" id="enlace_misAmigos">Mis Amigos</a></li>
+                <li><a href="" id="enlace_susSeguidores">Seguidores</a></li>
+                <li><a href="" id="enlace_susDiscos">Discos</a></li>
                
             </ul>
         </div>

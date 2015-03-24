@@ -90,6 +90,18 @@ public class Controlador_Relacionar extends HttpServlet {
             PrintWriter out = response.getWriter();
             
         }
+        else if(tipoBusqueda.equals("Artistas"))
+        {
+            System.out.println("RELACIONAR ARTISTA");
+            ArrayList<Usuario> usuario_obtenido = conexionNeo4j.obtenerNodo(palabra);
+             conexionNeo4j.relacionarArtista(usuario, palabra);
+            
+        }
+        else if(tipoBusqueda.equals("Fans Clubs"))
+        {
+            ArrayList<Usuario> usuario_obtenido = conexionNeo4j.obtenerNodo(palabra);
+           
+        }
             
         
     }

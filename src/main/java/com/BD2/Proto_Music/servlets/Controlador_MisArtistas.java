@@ -5,8 +5,11 @@
  */
 package com.BD2.Proto_Music.servlets;
 
+import com.BD2.Proto_Music.negocios.Usuario;
+import com.BD2.Proto_Music.servicios.Conexion;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -58,7 +61,29 @@ public class Controlador_MisArtistas extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String email = request.getParameter("usuario");
+        Conexion conexion = new Conexion();
+        ArrayList<Usuario> mis_artistas = conexion.retonarMisArtistas(email);
+        PrintWriter out = response.getWriter();
+        if(mis_artistas.size()>0)
+        {
+            for (int i = 0; i < mis_artistas.size(); i++) 
+            {
+                out.print("<hr/>");
+                out.print("<label><a href=\"perfil_artista.jsp?usuario="+email+"&artista="+mis_artistas.get(i).getEmail()+"\">"+mis_artistas.get(i).getNombre()+"</a></label><br/>");
+                
+                out.print("<label>"+mis_artistas.get(i).getPais()+"</label><br/>");
+                out.print("<hr/>");
+
+
+
+            }
+        }
+        else
+        {
+            out.print("<h1>"+email+" no sigue a ningun artista</h1>");
+        }
+        
     }
 
     /**
