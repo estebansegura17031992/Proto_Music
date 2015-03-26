@@ -5,6 +5,7 @@
  */
 package com.BD2.Proto_Music.servlets;
 
+import com.BD2.Proto_Music.negocios.Artista;
 import com.BD2.Proto_Music.negocios.Usuario;
 import com.BD2.Proto_Music.servicios.Conexion;
 import java.io.IOException;
@@ -63,16 +64,18 @@ public class Controlador_MisArtistas extends HttpServlet {
             throws ServletException, IOException {
         String email = request.getParameter("usuario");
         Conexion conexion = new Conexion();
-        ArrayList<Usuario> mis_artistas = conexion.retonarMisArtistas(email);
+        ArrayList<Artista> mis_artistas = conexion.retonarMisArtistas(email);
         PrintWriter out = response.getWriter();
-        if(mis_artistas.size()>0)
+        if(!mis_artistas.isEmpty())
         {
             for (int i = 0; i < mis_artistas.size(); i++) 
             {
                 out.print("<hr/>");
-                out.print("<label><a href=\"perfil_artista.jsp?usuario="+email+"&artista="+mis_artistas.get(i).getEmail()+"\">"+mis_artistas.get(i).getNombre()+"</a></label><br/>");
-                
+                out.print("<label><a href=\"perfil_artista.jsp?usuario="+email+"&artista="+mis_artistas.get(i).getEmail()+"\">"+
+                            mis_artistas.get(i).getNombre()+"</a></label><br/>");
+                out.print("<label>"+mis_artistas.get(i).getGenero()+"</label><br/>");
                 out.print("<label>"+mis_artistas.get(i).getPais()+"</label><br/>");
+                out.print("<label>"+mis_artistas.get(i).getSitioWeb()+"</label><br/>");
                 out.print("<hr/>");
 
 

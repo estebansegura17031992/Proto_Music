@@ -59,8 +59,6 @@
             <ul class="ul_menu">
                 <li><a href="" id="enlace_ul_menu_Artista">Artistas</a></li>
                 <li><a href="" id="enlace_ul_menu_Amigos">Amigos</a></li>
-                <li><a href="" id="enlace_ul_menu_Fans">Fans Clubs</a></li>
-                <li><a href="" id="enlace_ul_menu_Todo">Todo</a></li>
                 
             </ul>
         </div>
@@ -70,7 +68,6 @@
                 <select id="tipo_busqueda">
                     <option>Artistas</option>
                     <option>Amigos</option>
-                    <option>Fans Clubs</option>
                     <option>Todos</option>
                 </select><br/>
                 <input type="text" id="txtBuscar"/><br/>

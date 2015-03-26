@@ -5,6 +5,7 @@
  */
 package com.BD2.Proto_Music.servlets;
 
+import com.BD2.Proto_Music.negocios.Artista;
 import com.BD2.Proto_Music.negocios.Usuario;
 import com.BD2.Proto_Music.servicios.Conexion;
 import java.io.IOException;
@@ -84,7 +85,7 @@ public class Controlador_Relacionar extends HttpServlet {
         Conexion conexionNeo4j = new Conexion();
         if(tipoBusqueda.equals("Amigos"))
         {
-            
+            System.out.println("RELACONAR AMIGO");
             ArrayList<Usuario> usuario_obtenido = conexionNeo4j.obtenerNodo(palabra);
             conexionNeo4j.relacionarAmigos(usuario, palabra);
             PrintWriter out = response.getWriter();
@@ -93,14 +94,9 @@ public class Controlador_Relacionar extends HttpServlet {
         else if(tipoBusqueda.equals("Artistas"))
         {
             System.out.println("RELACIONAR ARTISTA");
-            ArrayList<Usuario> usuario_obtenido = conexionNeo4j.obtenerNodo(palabra);
-             conexionNeo4j.relacionarArtista(usuario, palabra);
+            ArrayList<Artista> artista_obtenido = conexionNeo4j.obtenerNodo_Artista(palabra);
+            conexionNeo4j.relacionarArtista(usuario, palabra);
             
-        }
-        else if(tipoBusqueda.equals("Fans Clubs"))
-        {
-            ArrayList<Usuario> usuario_obtenido = conexionNeo4j.obtenerNodo(palabra);
-           
         }
             
         

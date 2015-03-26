@@ -82,7 +82,6 @@
             <ul class="ul_menu">
                 <li><a href="" id="enlace_misArtistas">Mis Artistas</a></li>
                 <li><a href="" id="enlace_misAmigos">Mis Amigos</a></li>
-                <li><a href="">Fans Clubs</a></li>
                
             </ul>
         </div>

@@ -106,7 +106,7 @@
         </div>
         <div id="div_noticias">
             
-                <h1>Sus Artistas</h1>
+                <h1>Seguidores</h1>
             <div id="div_noticias_contenido">
                 
             </div>

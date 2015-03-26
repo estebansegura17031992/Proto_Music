@@ -5,6 +5,7 @@
  */
 package com.BD2.Proto_Music.servlets;
 
+import com.BD2.Proto_Music.negocios.Artista;
 import com.BD2.Proto_Music.negocios.Usuario;
 import com.BD2.Proto_Music.servicios.Conexion;
 import java.io.IOException;
@@ -64,16 +65,20 @@ public class Controlador_SuPerfilArtista extends HttpServlet {
         String email_artista = request.getParameter("artista");
         
         Conexion conexion = new Conexion();
-        /*ArrayList<Usuario> usuario_obtenido = conexion.obtenerNodo_Artista(email_artista);
+        ArrayList<Artista> artista_obtenido = conexion.obtenerNodo_Artista(email_artista);
         PrintWriter out = response.getWriter();
-        for (int i = 0; i < usuario_obtenido.size(); i++) 
+        for (int i = 0; i < artista_obtenido.size(); i++) 
         {
             out.print("<h1> Informacion Basica</h1>");
-            out.print("<label> Nombre: "+usuario_obtenido.get(i).getNombre()+"</label><br/>");
-            out.print("<label>Pais: "+usuario_obtenido.get(i).getPais()+"</label><br/>");
-            out.print("<label>Email:" + usuario_obtenido.get(i).getEmail()+"</label><br/>");
+            out.print("<label> Nombre: "+artista_obtenido.get(i).getNombre()+"</label><br/>");
+            out.print("<label>Genero: "+artista_obtenido.get(i).getGenero()+"</label><br/>");
+            out.print("<label>Pais: "+artista_obtenido.get(i).getPais()+"</label><br/>");
+            out.print("<label>Fecha de conformacion: "+artista_obtenido.get(i).getFechaConformacion()+"</label><br/>");
+            out.print("<label>Estado: "+artista_obtenido.get(i).getEstado()+"</label>");
+            out.print("<label>Pagina Web:" + artista_obtenido.get(i).getSitioWeb()+"</label><br/>");
 //            out.print("<input type='submit' value='Agregar a mis amigos' id='agregar_amigo'/>");
-        }*/
+        }
+        System.out.println("INFO ARTISTA");
     }
 
     /**

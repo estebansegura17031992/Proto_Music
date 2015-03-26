@@ -5,7 +5,6 @@
  */
 package com.BD2.Proto_Music.servlets;
 
-import com.BD2.Proto_Music.negocios.Artista;
 import com.BD2.Proto_Music.negocios.Usuario;
 import com.BD2.Proto_Music.servicios.Conexion;
 import java.io.IOException;
@@ -21,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author esteban
  */
-@WebServlet(name = "Controlador_SusArtistas", urlPatterns = {"/Controlador_SusArtistas"})
-public class Controlador_SusArtistas extends HttpServlet {
+@WebServlet(name = "Controlador_MisSeguidores", urlPatterns = {"/Controlador_MisSeguidores"})
+public class Controlador_MisSeguidores extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +40,10 @@ public class Controlador_SusArtistas extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Controlador_SusArtistas</title>");            
+            out.println("<title>Servlet Controlador_MisSeguidores</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Controlador_SusArtistas at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Controlador_MisSeguidores at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,20 +62,21 @@ public class Controlador_SusArtistas extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String usuario = request.getParameter("usuario");
-        String usuario_amigo = request.getParameter("usuario_amigo");
         Conexion conexion = new Conexion();
-        ArrayList<Artista> sus_artistas = conexion.retonarSusArtistas(usuario_amigo);
+        ArrayList<Usuario> mis_seguidores = conexion.retonarMisSeguidores(usuario);
         PrintWriter out = response.getWriter();
-        if(!sus_artistas.isEmpty())
+        if(!mis_seguidores.isEmpty())
         {
-            for (int i = 0; i < sus_artistas.size(); i++) 
+            out.print("<h1>Numero de seguidores: "+mis_seguidores.size()+"</h1>");
+            for (int i = 0; i < mis_seguidores.size(); i++) 
             {
+                
                 out.print("<hr/>");
-                out.print("<label><a href=\"perfil_artista.jsp?usuario="+usuario+"&artista="+sus_artistas.get(i).getEmail()+"\">"+
-                            sus_artistas.get(i).getNombre()+"</a></label><br/>");
-                out.print("<label>"+sus_artistas.get(i).getGenero()+"</label><br/>");
-                out.print("<label>"+sus_artistas.get(i).getPais()+"</label><br/>");
-                out.print("<label>"+sus_artistas.get(i).getSitioWeb()+"</label><br/>");
+                out.print("<label>"+mis_seguidores.get(i).getNombre()+" "+mis_seguidores.get(i).getApellido1()+" "
+                                +mis_seguidores.get(i).getApellido2()+"</label><br/>");
+                out.print("<label>Email:" + mis_seguidores.get(i).getEmail()+"</label><br/>");
+                out.print("<label>"+mis_seguidores.get(i).getEdad()+" a&ntilde;os</label><br/>");
+                out.print("<label>"+mis_seguidores.get(i).getPais()+"</label><br/>");
                 out.print("<hr/>");
 
 
@@ -85,7 +85,7 @@ public class Controlador_SusArtistas extends HttpServlet {
         }
         else
         {
-           out.print("<h1>"+usuario_amigo+" no sigue a ningun artista</h1>");
+           out.print("<h1>No lo esta siguiendo nadie</h1>");
         }
     }
 

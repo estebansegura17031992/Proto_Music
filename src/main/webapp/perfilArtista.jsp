@@ -32,8 +32,10 @@
             
             /*RUTAS*/
             var urlCrearDisco = "crearDisco.jsp?usuario="+usuario;
-            var url_mis_seguidores = "mis_amigos.jsp?usuario="+usuario;
+            var url_mis_seguidores = "mis_seguidores.jsp?usuario="+usuario;
             var url_mis_artistas = "mis_artistas.jsp?usuario="+usuario;
+            var url_mis_discos = "mis_discos.jsp?usuario="+usuario;
+            
              $(document).ready(function()
             {
                 $.ajax(
@@ -61,7 +63,7 @@
             $(document).ready(function(){
                
                 $("#enlace_misSeguidores").each(function(i){
-                    $(this).attr("href",url_mis_amigos);
+                    $(this).attr("href",url_mis_seguidores);
                 }); 
             });
             
@@ -71,6 +73,15 @@
                     $(this).attr("href",url_mis_artistas);
                 }); 
             });
+            
+             $(document).ready(function(){
+               
+                $("#enlace_misDiscos").each(function(i){
+                    $(this).attr("href",url_mis_discos);
+                }); 
+            });
+            
+            
             
         </script>
         <title>Proto Music</title>
@@ -86,7 +97,7 @@
         <div id="menu">
             <ul class="ul_menu">
                 <li><a href="" id="enlace_misSeguidores">Mis Seguidores</a></li>
-                <li><a href="" id="enlace_misDiscos">Discos</a></li>
+                <li><a href="" id="enlace_misDiscos">Mis Discos</a></li>
                
             </ul>
         </div>

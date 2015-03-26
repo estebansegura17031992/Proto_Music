@@ -1,6 +1,6 @@
 <%-- 
-    Document   : mis_seguidores
-    Created on : Mar 24, 2015, 3:33:42 AM
+    Document   : mis_discos
+    Created on : Mar 25, 2015, 11:02:00 PM
     Author     : esteban
 --%>
 
@@ -35,7 +35,7 @@
             var urlCrearDisco = "crearDisco.jsp?usuario="+usuario;
             var url_mis_seguidores = "mis_seguidores.jsp?usuario="+usuario;
             var url_mi_perfil = "perfilArtista.jsp?usuario="+usuario;
-            var url_mis_discos = "mis_discos.jsp?usuario="+usuario;
+            var url_mis_seguidores = "mis_seguidores.jsp?usuario="+usuario;
             
             
             $(document).ready(function(){
@@ -61,8 +61,8 @@
             
              $(document).ready(function(){
                
-                $("#enlace_misDiscos").each(function(i){
-                    $(this).attr("href",url_mis_discos);
+                $("#enlace_misSeguidores").each(function(i){
+                    $(this).attr("href",url_mis_seguidores);
                 }); 
             });
             
@@ -82,7 +82,7 @@
                 {
                     type:'GET',
                     data:{usuario: usuario},
-                    url: 'Controlador_MisSeguidores',
+                    url: 'Controlador_MisDiscos2',
 
                     success: function(result)
                     {
