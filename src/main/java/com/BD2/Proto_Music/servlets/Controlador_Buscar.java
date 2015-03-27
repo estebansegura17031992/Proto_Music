@@ -83,6 +83,7 @@ public class Controlador_Buscar extends HttpServlet {
                 {
                     for (int i = 0; i < usuario_obtenido.size(); i++) 
                     {
+                        out.print("<fieldset class='login'>");
                         out.print("<label> Nombre: "+usuario_obtenido.get(i).getNombre()+"</label><br/>");
                         out.print("<label>Apellido1: "+usuario_obtenido.get(i).getApellido1()+"</label><br/>");
                         out.print("<label>Apellido2: "+usuario_obtenido.get(i).getApellido2()+"</label><br/>");
@@ -90,6 +91,8 @@ public class Controlador_Buscar extends HttpServlet {
                         out.print("<label>Pais: "+usuario_obtenido.get(i).getPais()+"</label><br/>");
                         out.print("<label>Email:" + usuario_obtenido.get(i).getEmail()+"</label><br/>");
                         out.print("<input type='submit' value='Agregar a mis amigos' id='agregar_amigo' class='button'/>");
+                        out.print("<br/>");
+                        out.print("</fieldset>");
 
                     }
                 }

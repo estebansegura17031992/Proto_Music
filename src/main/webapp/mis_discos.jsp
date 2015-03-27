@@ -103,6 +103,7 @@
             </ul>
         </div>
         <div id="menu">
+            <header class="header_menu">Menu</header>
             <ul class="ul_menu">
                 <li><a href="" id="enlace_misSeguidores">Mis Seguidores</a></li>
                 <li><a href="" id="enlace_misDiscos">Mis Discos</a></li>

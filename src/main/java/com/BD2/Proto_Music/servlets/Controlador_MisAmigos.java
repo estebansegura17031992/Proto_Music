@@ -71,14 +71,15 @@ public class Controlador_MisAmigos extends HttpServlet {
         {
             for (int i = 0; i < mis_amigos.size(); i++) 
             {
-                out.print("<hr/>");
+                out.print("<fieldset class='login'>");
                 out.print("<label><a href=\"perfil_amigo.jsp?usuario="+email+"&amigo="+mis_amigos.get(i).getEmail()+"\">"+mis_amigos.get(i).getNombre()+" "+
                                                 mis_amigos.get(i).getApellido1()+" "
                                 +mis_amigos.get(i).getApellido2()+"</a></label><br/>");
                 out.print("<label>Email:" + mis_amigos.get(i).getEmail()+"</label><br/>");
                 out.print("<label>"+mis_amigos.get(i).getEdad()+" a&ntilde;os</label><br/>");
                 out.print("<label>"+mis_amigos.get(i).getPais()+"</label><br/>");
-                out.print("<hr/>");
+                out.print("<br/>");
+                out.print("</fieldset>");
 
 
 

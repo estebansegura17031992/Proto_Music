@@ -70,13 +70,14 @@ public class Controlador_MisArtistas extends HttpServlet {
         {
             for (int i = 0; i < mis_artistas.size(); i++) 
             {
-                out.print("<hr/>");
+                out.print("<fieldset class='login'>");
                 out.print("<label><a href=\"perfil_artista.jsp?usuario="+email+"&artista="+mis_artistas.get(i).getEmail()+"\">"+
                             mis_artistas.get(i).getNombre()+"</a></label><br/>");
                 out.print("<label>"+mis_artistas.get(i).getGenero()+"</label><br/>");
                 out.print("<label>"+mis_artistas.get(i).getPais()+"</label><br/>");
                 out.print("<label>"+mis_artistas.get(i).getSitioWeb()+"</label><br/>");
-                out.print("<hr/>");
+                out.print("<br/>");
+                out.print("</fieldset>");
 
 
 

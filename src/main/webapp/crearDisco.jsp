@@ -96,6 +96,7 @@
             </ul>
         </div>
         <div id="menu">
+            <header class="header_menu">Menu</header>
             <ul class="ul_menu">
                 <li><a href="" id="enlace_misArtistas">Mis Seguidores</a></li>
                 <li><a href="" id="enlace_misAmigos">Discos</a></li>
@@ -105,21 +106,21 @@
         <div id="div_noticias">
             <div id="div_noticias_contenido">
                 <h1>Crear Disco</h1>
-        
-                <label>Nombre del Disco</label><br/>
-                <input type="text" name="nombre" id="nombre"><br/>
-                <label>Genero</label><br/>
-                <input type="text" name="genero" id="genero"><br/>
-                <label>Publicacion</label><br/>
-                <input type="text" name="publicacion" id="publicacion"/><br/>
-                <label>Discografica Web</label><br/>
-                <input type="text" name="discografica" id="discografica"><br/>
-                <label>Duracion</label><br/>
-                <input type="text" name="duracion" id="duracion"><br/>
-                <label>Productor(es)</label><br/>
-                <input type="text" name="productor" id="productor"><br/>
-
-                <input type="submit" id="CrearDisco" value="Crear Disco" >
+                <fieldset class="login">
+                    <label>Nombre del Disco</label><br/>
+                    <input type="text" name="nombre" id="nombre" class="input"><br/>
+                    <label>Genero</label><br/>
+                    <input type="text" name="genero" id="genero" class="input"><br/>
+                    <label>Publicacion</label><br/>
+                    <input type="text" name="publicacion" id="publicacion" class="input"/><br/>
+                    <label>Discografica Web</label><br/>
+                    <input type="text" name="discografica" id="discografica" class="input"><br/>
+                    <label>Duracion</label><br/>
+                    <input type="text" name="duracion" id="duracion" class="input"><br/>
+                    <label>Productor(es)</label><br/>
+                    <input type="text" name="productor" id="productor" class="input"><br/>
+                    <input type="submit" id="CrearDisco" value="Crear Disco" class="button">
+                </fieldset>
             </div>
         </div>
     </body>
