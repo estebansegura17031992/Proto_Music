@@ -52,6 +52,7 @@
         </div>
         
          <div id="menu">
+            <header class="header_menu">Menu</header>
             <div id="info">
                 <div id="info">
                 </div>
@@ -70,8 +71,8 @@
                     <option>Amigos</option>
                     <option>Todos</option>
                 </select><br/>
-                <input type="text" id="txtBuscar"/><br/>
-                <input type="submit" id="buscarPalabra" value="Buscar"/>
+                <input type="text" id="txtBuscar" class="input"/><br/>
+                <input type="submit" id="buscarPalabra" value="Buscar" class="button"/>
             </div>
             <div id="div_resultados">
                 

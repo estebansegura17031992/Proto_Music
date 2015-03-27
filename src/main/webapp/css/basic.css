@@ -24,7 +24,7 @@ body.body_intro
 #header
 {
     position : fixed;
-    background-color: #000;
+    background-color: #1A1F2B;
     width: 1100px;
     text-align: center;
     z-index: 1;
@@ -45,8 +45,8 @@ body.body_intro
 
 .ul_header li a
 {
-     text-decoration: none;
-     color:#EEEEEE;
+    text-decoration: none;
+    color:#EEEEEE;
     padding:10px 15px;
 }
 
@@ -57,42 +57,111 @@ body.body_intro
     width: 200px;
     height: 800px;
     margin-top: 50px;
-    background-color: #038170;
+    background-color: #4A6491;
+    border-style: solid;
+    border-color: #30395C;
+    border-width: 2px;
+    
 }
-
+.header_menu
+{
+    position: fixed;
+    width: 200px;
+    height: 30px;
+    text-align: center;
+    font: 20px arial, sans-serif;
+    background-color: #30395C;
+    color: #EEEEEE
+}
 .ul_menu
 {
-    width: 150px;
+    margin-top: 50px;
+    width: 125px;
 }
 .ul_menu li
 {
     list-style: none;
-    width: inherit;
+    width: 125px;
 }
 .ul_menu li a
 {
     text-decoration: none;
     color:#EEEEEE;
-    padding:10px 15px;
+    top:35px;
+    padding: 10px 10px;
     display:block;
     text-align: center;
 }
 
 .ul_menu li a:hover
 {
-  background-color:#434343;
+  background-color:#85A5CC;
 }
 
 #div_noticias
 {
-    position: absolute;
-    width: 900px;
-    height: 800px;
+    position: fixed;
+    width: 896px;
+    height: 804px;
     margin-top: 50px;
-    margin-left: 200px; 
-    background-color: #098540;
+    margin-left: 204px;
+    background-color: #D0E4F2;
 }
 #div_noticias_contenido
 {
     position: relative;
+}
+input.button
+{
+    width: auto;
+    height: 30px;
+    border-width: 1px;
+    padding: 7px 14px;
+    font-size: 14px;
+    color: #FFFFFF;
+    background-color: #2980B9 ;
+}
+input.button2
+{
+    width: autopx;
+    height: 30px;
+    border-width: 1px;
+    padding: 7px 14px;
+    font-size: 14px;
+    background-color: #FFFFFF ;
+}
+input.input
+{
+    width: 380px;
+    height: 25px;
+    margin: 5px 0px;
+}
+fieldset.login
+{
+    position: fixed;
+    width: auto;
+    height: auto;
+    background-color: #FFFFFF ;
+    border-width: 1px;
+    border-color: black;
+}
+label
+{
+    font-family: "Times New Roman";
+    font-size: 20px;
+    text-align: center;
+}
+label.title
+{
+    font-size: 22px;
+}
+legend
+{
+    font-size: 24px;
+}
+select
+{
+    width: 382px;
+    height: 30px;
+    margin: 5px 0px;
 }

@@ -89,7 +89,7 @@ public class Controlador_Buscar extends HttpServlet {
                         out.print("<label>Edad: "+usuario_obtenido.get(i).getEdad()+"</label><br/>");
                         out.print("<label>Pais: "+usuario_obtenido.get(i).getPais()+"</label><br/>");
                         out.print("<label>Email:" + usuario_obtenido.get(i).getEmail()+"</label><br/>");
-                        out.print("<input type='submit' value='Agregar a mis amigos' id='agregar_amigo'/>");
+                        out.print("<input type='submit' value='Agregar a mis amigos' id='agregar_amigo' class='button'/>");
 
                     }
                 }
@@ -118,7 +118,7 @@ public class Controlador_Buscar extends HttpServlet {
                     out.print("<label>Fecha de Conformacion: "+artista_obtenido.get(i).getFechaConformacion()+"</label><br/>");
                     out.print("<label>Estado: "+artista_obtenido.get(i).getEstado()+"</label><br/>");
                     out.print("<label>Sitio Web: " + artista_obtenido.get(i).getSitioWeb()+"</label><br/>");
-                    out.print("<input type='submit' value='Seguir' id='agregar_artista'/>");
+                    out.print("<input type='submit' value='Seguir' id='agregar_artista' class='button'/>");
                     
                 }
             }

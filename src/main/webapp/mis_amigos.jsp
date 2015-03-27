@@ -86,6 +86,7 @@
             </ul>
         </div>
         <div id="menu">
+            <header class="header_menu">Menu</header>
             <ul class="ul_menu">
                 <li><a href="" id="enlace_misArtistas">Mis Artistas</a></li>
                 <li><a href="" id="enlace_misAmigos">Mis Amigos</a></li>

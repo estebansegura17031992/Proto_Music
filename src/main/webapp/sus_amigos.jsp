@@ -88,6 +88,7 @@
             </ul>
         </div>
         <div id="menu">
+            <header class="header_menu">Menu</header>
             <div id="info">
                 <div id="info">
                 </div>

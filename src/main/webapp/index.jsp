@@ -12,26 +12,24 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <div>
-            <form method="POST" action="registroUsuario.jsp">
-            <input type="submit" id="registro" value="Registrar">
-            </form>
-        </div>
         <h1>Proto Music</h1>
-        <fieldset>
-            <legend>Login</legend>
-            <label>Tipo</label><br/>
+        <fieldset class="login">
+            <label class="title" >Tipo</label><br/><br/>
             <label>Usuario</label>
             <input id="usuario" type="radio" name="tipo" value="Usuario">
             <label>Artista</label>
-            <input id="artista" type="radio" name="tipo" value="Artista">
-            
-            <br/>
+            <input id="artista" type="radio" name="tipo" value="Artista" ><br/><br/>
             <label>Correo</label><br/>
-            <input type="text" name="email" id="email_index"><br/>
+            <input type="text" name="email" id="email_index" class="input"><br/>
             <label>Password</label><br/>
-            <input type="password" name="password" id="password_index"><br/>
-            <input type="submit" id="Entrar" value="Entrar">
+            <input type="password" name="password" id="password_index" class="input"><br/>
+            <input type="submit" id="Entrar" value="Entrar" class="button"><br/><br/>
+            <a>Si es nuevo presione registrar</a><br/><br/>
+            <div>
+                <form method="POST" action="registroUsuario.jsp">
+                <input type="submit" id="registro" value="Registrar" class="button2">
+                </form>
+            </div>
         </fieldset>
         
         <div id="respuesta">

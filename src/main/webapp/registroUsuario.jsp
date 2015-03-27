@@ -18,26 +18,26 @@
     </head>
     <body>
         <h1>Registro de Usuario</h1>
-        
-        <label>Nombre</label><br/>
-        <input type="text" name="nombre" id="nombre"><br/>
-        <label>Apellido 1</label><br/>
-        <input type="text" name="apellido1" id="apellido1"><br/>
-        <label>Apellido 2</label><br/>
-        <input type="text" name="apellido2" id="apellido2"><br/>
-        <label>Edad</label><br/>
-        <input type="text" name="edad" id="edad"><br/>
-        <label>Pais</label><br/>
-        <input type="text" name="pais" id="pais"><br/>
-        <label>Email</label><br/>
-        <input type="text" name="email" id="email"><br/>
-        <label>Password</label><br/>
-        <input type="password" name="password" id="password"><br/>
-        <label>Confirmar Password</label><br/>
-        <input type="password" name="confirmPassword" id="confirmPassword"><br/>
-        
-        <input type="submit" id="RegistrarUsuario" value="Registrar" >
-        <hr/>
-        <a href="registroArtista.jsp">¿Eres un artista o un grupo musical?</a>
+        <fieldset class="login">
+            <label>Nombre</label><br/>
+            <input type="text" name="nombre" id="nombre" class="input"><br/>
+            <label>Apellido 1</label><br/>
+            <input type="text" name="apellido1" id="apellido1" class="input"><br/>
+            <label>Apellido 2</label><br/>
+            <input type="text" name="apellido2" id="apellido2" class="input"><br/>
+            <label>Edad</label><br/>
+            <input type="text" name="edad" id="edad" class="input"><br/>
+            <label>Pais</label><br/>
+            <input type="text" name="pais" id="pais" class="input"><br/>
+            <label>Email</label><br/>
+            <input type="text" name="email" id="email" class="input"><br/>
+            <label>Password</label><br/>
+            <input type="password" name="password" id="password" class="input"><br/>
+            <label>Confirmar Password</label><br/>
+            <input type="password" name="confirmPassword" id="confirmPassword" class="input"><br/>
+            <input type="submit" id="RegistrarUsuario" value="Registrar" class="button" >
+            <hr/>
+            <a href="registroArtista.jsp">¿Eres un artista o un grupo musical?</a>
+        </fieldset>
     </body>
 </html>

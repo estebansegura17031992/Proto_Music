@@ -17,29 +17,30 @@
         
     </head>
     <body>
-        <h1>Registro de Artista o Grupo Musical</h1>
-        
-        <label>Nombre del Artista/Grupo</label><br/>
-        <input type="text" name="nombre" id="nombre"><br/>
-        <label>Genero</label><br/>
-        <input type="text" name="genero" id="genero"><br/>
-        <label>Sitio Web</label><br/>
-        <input type="text" name="sitioWeb" id="sitioWeb"><br/>
-        <label>Pais</label><br/>
-        <input type="text" name="pais" id="pais"><br/>
-        <label>Fecha de Conformacion</label><br/>
-        <input type="text" name="fechaConformacion" id="fechaConformacion"><br/>
-        <label>Estado</label><br/>
-        <input type="text" name="estado" id="estado"><br/>
-        <label>Email</label><br/>
-        <input type="text" name="email" id="email"><br/>
-        <label>Password</label><br/>
-        <input type="password" name="password" id="password"><br/>
-        <label>Confirmar Password</label><br/>
-        <input type="password" name="confirmPassword" id="confirmPassword"><br/>
-        
-        <input type="submit" id="RegistrarArtista" value="Registrar" >
-        <hr/>
-        <a href="registroUsuario.jsp">¿Eres un usuario?</a>
+        <h1>Registro de Artista o Grupo</h1>
+        <fieldset class="login">
+            <label>Nombre del Artista/Grupo</label><br/>
+            <input type="text" name="nombre" id="nombre" class="input"><br/>
+            <label>Genero</label><br/>
+            <input type="text" name="genero" id="genero" class="input"><br/>
+            <label>Sitio Web</label><br/>
+            <input type="text" name="sitioWeb" id="sitioWeb" class="input"><br/>
+            <label>Pais</label><br/>
+            <input type="text" name="pais" id="pais" class="input"><br/>
+            <label>Fecha de Conformacion</label><br/>
+            <input type="text" name="fechaConformacion" id="fechaConformacion" class="input"><br/>
+            <label>Estado</label><br/>
+            <input type="text" name="estado" id="estado" class="input"><br/>
+            <label>Email</label><br/>
+            <input type="text" name="email" id="email" class="input"><br/>
+            <label>Password</label><br/>
+            <input type="password" name="password" id="password" class="input"><br/>
+            <label>Confirmar Password</label><br/>
+            <input type="password" name="confirmPassword" id="confirmPassword" class="input"><br/>
+
+            <input type="submit" id="RegistrarArtista" value="Registrar" class="button" >
+            <hr/>
+            <a href="registroUsuario.jsp">¿Eres un usuario?</a>
+        </fieldset>
     </body>
 </html>
